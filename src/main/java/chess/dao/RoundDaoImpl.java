@@ -40,7 +40,12 @@ public class RoundDaoImpl implements RoundDao {
                     int round = resultSet.getInt("round");
                     int start = resultSet.getInt("start");
                     int target = resultSet.getInt("target");
-                    RoundDto roundDto = new RoundDto(round, start, target);
+
+                    RoundDto roundDto = new RoundDto.Builder()
+                                            .round(round)
+                                            .from(start)
+                                            .to(target)
+                                            .build();
 
                     roundDtos.add(roundDto);
                 }

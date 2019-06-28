@@ -1,5 +1,6 @@
 package chess.domain;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -42,33 +43,42 @@ public enum MovementUnit {
     }
 
     public static Set<MovementUnit> getFourWay() {
-        Set<MovementUnit> movements = new HashSet<>();
-        movements.add(MovementUnit.UP);
-        movements.add(MovementUnit.DOWN);
-        movements.add(MovementUnit.RIGHT);
-        movements.add(MovementUnit.LEFT);
+        Set<MovementUnit> movements = new HashSet<>(
+                Arrays.asList(MovementUnit.UP,
+                        MovementUnit.DOWN,
+                        MovementUnit.RIGHT,
+                        MovementUnit.LEFT)
+        );
+
         return movements;
     }
 
     public static Set<MovementUnit> getDiagonals() {
-        Set<MovementUnit> movements = new HashSet<>();
-        movements.add(MovementUnit.UP_RIGHT);
-        movements.add(MovementUnit.UP_LEFT);
-        movements.add(MovementUnit.DOWN_RIGHT);
-        movements.add(MovementUnit.DOWN_LEFT);
+        Set<MovementUnit> movements = new HashSet<>(
+                Arrays.asList(MovementUnit.UP_RIGHT,
+                        MovementUnit.UP_LEFT,
+                        MovementUnit.DOWN_RIGHT,
+                        MovementUnit.DOWN_LEFT
+                )
+        );
+
         return movements;
     }
 
     public static Set<MovementUnit> getKnightWays() {
-        Set<MovementUnit> movements = new HashSet<>();
-        movements.add(KNIGHT_UP_RIGHT);
-        movements.add(KNIGHT_RIGHT_UP);
-        movements.add(KNIGHT_UP_LEFT);
-        movements.add(KNIGHT_LEFT_UP);
-        movements.add(KNIGHT_DOWN_RIGHT);
-        movements.add(KNIGHT_RIGHT_DOWN);
-        movements.add(KNIGHT_DOWN_LEFT);
-        movements.add(KNIGHT_LEFT_DOWN);
+        Set<MovementUnit> movements = new HashSet<>(
+                Arrays.asList(
+                        KNIGHT_UP_RIGHT,
+                        KNIGHT_RIGHT_UP,
+                        KNIGHT_UP_LEFT,
+                        KNIGHT_LEFT_UP,
+                        KNIGHT_DOWN_RIGHT,
+                        KNIGHT_RIGHT_DOWN,
+                        KNIGHT_DOWN_LEFT,
+                        KNIGHT_LEFT_DOWN
+                )
+        );
+
         return movements;
     }
 

@@ -22,10 +22,11 @@ public class Board {
         Piece selectedPiece = newPieces.get(startSpot);
         Piece targetPiece = newPieces.get(endSpot);
 
-        if (moveValidation(startSpot, endSpot)) {
+        if (validateMovement(startSpot, endSpot)) {
             newPieces.replace(endSpot, selectedPiece);
             newPieces.replace(startSpot, Empty.getInstance());
         }
+
         if (isKingDie(targetPiece)) {
             Team winnerTeam = selectedPiece.getTeam();
             newPieces.replaceAll(((spot, piece) -> new King(winnerTeam)));
@@ -37,7 +38,7 @@ public class Board {
         return targetPiece.getPieceType() == PieceType.KING;
     }
 
-    private boolean moveValidation(Spot startSpot, Spot endSpot) {
+    private boolean validateMovement(Spot startSpot, Spot endSpot) {
         return isMovable(startSpot, endSpot) && isPieceMovement(startSpot, endSpot);
     }
 
@@ -53,15 +54,15 @@ public class Board {
         return checkPath(startSpot.nextSpot(movementUnit), endSpot, movementUnit);
     }
 
-    private boolean checkPath(Spot startSpot, Spot endSpot, MovementUnit movementUnit) {
-        if (startSpot == endSpot) {
+    private boolean checkPath(Spot nextSpot, Spot endSpot, MovementUnit movementUnit) {
+        if (nextSpot == endSpot) {
             return true;
         }
-        Piece piece = pieces.get(startSpot);
+        Piece piece = pieces.get(nextSpot);
         if (piece != Empty.getInstance()) {
             return false;
         }
-        return checkPath(startSpot.nextSpot(movementUnit), endSpot, movementUnit);
+        return checkPath(nextSpot.nextSpot(movementUnit), endSpot, movementUnit);
     }
 
     private boolean isPieceMovement(Spot startSpot, Spot endSpot) {

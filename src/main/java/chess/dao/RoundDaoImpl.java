@@ -2,6 +2,7 @@ package chess.dao;
 
 import chess.dto.RoundDto;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class RoundDaoImpl implements RoundDao {
         return roundDaoImpl;
     }
 
-    public void addRound(RoundDto roundDto) throws SQLException {
+    public void addRound(RoundDto roundDto) {
         PreparedStatementSetter pss = preparedStatement -> {
             preparedStatement.setInt(1, roundDto.getRound());
             preparedStatement.setInt(2, roundDto.getFrom());
@@ -30,21 +31,25 @@ public class RoundDaoImpl implements RoundDao {
         template.executeUpdate(query, pss);
     }
 
-    public List<RoundDto> selectRound() throws SQLException {
-        RowMapper rowMapper = resultSet -> {
-            List<RoundDto> roundDtos = new ArrayList<>();
-            while (resultSet.next()) {
-                RoundDto roundDto = new RoundDto();
-                roundDto.setRound(resultSet.getInt("round"));
-                roundDto.setFrom(resultSet.getInt("start"));
-                roundDto.setTo(resultSet.getInt("target"));
-                roundDtos.add(roundDto);
+    public List<RoundDto> selectRound() {
+        RowMapper rowMapper = new RowMapper() {
+            @Override
+            public List<RoundDto> mapRow(ResultSet resultSet) throws SQLException {
+                List<RoundDto> roundDtos = new ArrayList<>();
+                while (resultSet.next()) {
+                    int round = resultSet.getInt("round");
+                    int start = resultSet.getInt("start");
+                    int target = resultSet.getInt("target");
+                    RoundDto roundDto = new RoundDto(round, start, target);
+
+                    roundDtos.add(roundDto);
+                }
+                return roundDtos;
             }
-            return roundDtos;
         };
         JdbcTemplate template = new JdbcTemplate();
         String query = "SELECT round, start, target FROM game ORDER BY round ASC";
-        return (List<RoundDto>) template.executeQuery(query, rowMapper);
 
+        return template.executeQuery(query, rowMapper);
     }
 }

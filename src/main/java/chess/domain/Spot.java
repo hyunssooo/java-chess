@@ -80,10 +80,6 @@ public class Spot {
         return this.x == spot.x;
     }
 
-    public boolean checkColumn(int y) {
-        return this.y == y;
-    }
-
     public String getIndex() {
         return String.valueOf(SPOTS.indexOf(this));
     }

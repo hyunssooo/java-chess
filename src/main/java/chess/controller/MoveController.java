@@ -9,7 +9,7 @@ import spark.Response;
 import java.sql.SQLException;
 
 public class MoveController {
-    public static final String PATH = "/move";
+    public static final String MOVE_PATH = "/move";
 
     private MoveController() {
     }

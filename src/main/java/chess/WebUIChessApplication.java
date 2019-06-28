@@ -9,6 +9,9 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+import static chess.controller.MoveController.MOVE_PATH;
+import static chess.controller.ScoreController.SCORE_PATH;
+import static chess.controller.StartController.START_PATH;
 import static spark.Spark.*;
 
 public class WebUIChessApplication {
@@ -45,11 +48,11 @@ public class WebUIChessApplication {
             return render(map, "index.html");
         });
 
-        get(StartController.PATH, startController::start);
+        get(START_PATH, startController::start);
 
-        get(MoveController.PATH, moveController::move);
+        get(MOVE_PATH, moveController::move);
 
-        get(ScoreController.PATH, scoreController::score);
+        get(SCORE_PATH, scoreController::score);
     }
 
     private static String render(Map<String, Object> model, String templatePath) {

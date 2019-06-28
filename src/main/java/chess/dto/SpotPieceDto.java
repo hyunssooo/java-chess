@@ -13,15 +13,7 @@ public class SpotPieceDto {
         return point;
     }
 
-    public void setPoint(String point) {
-        this.point = point;
-    }
-
     public String getPiece() {
         return piece;
-    }
-
-    public void setPiece(String piece) {
-        this.piece = piece;
     }
 }

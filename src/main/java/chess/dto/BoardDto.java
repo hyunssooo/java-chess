@@ -28,16 +28,8 @@ public class BoardDto {
         return blackTeam;
     }
 
-    public void setBlackTeam(List<SpotPieceDto> blackTeam) {
-        this.blackTeam = blackTeam;
-    }
-
     public List<SpotPieceDto> getWhiteTeam() {
         return whiteTeam;
-    }
-
-    public void setWhiteTeam(List<SpotPieceDto> whiteTeam) {
-        this.whiteTeam = whiteTeam;
     }
 }
 

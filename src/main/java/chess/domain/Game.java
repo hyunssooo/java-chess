@@ -28,10 +28,7 @@ public class Game {
 
         Board movedBoard = board.move(startSpot, endSpot);
         if (!movedBoard.equals(board)) {
-            RoundDto roundDto = new RoundDto();
-            roundDto.setRound(round.getRound());
-            roundDto.setFrom(from);
-            roundDto.setTo(to);
+            RoundDto roundDto = new RoundDto(round.getRound(), from, to);
             roundDao.addRound(roundDto);
             round.nextRound();
             board = movedBoard;

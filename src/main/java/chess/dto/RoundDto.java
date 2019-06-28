@@ -5,27 +5,21 @@ public class RoundDto {
     private int from;
     private int to;
 
-    public int getRound() {
-        return round;
+    public RoundDto(int round, int from, int to) {
+        this.round = round;
+        this.from = from;
+        this.to = to;
     }
 
-    public void setRound(int round) {
-        this.round = round;
+    public int getRound() {
+        return round;
     }
 
     public int getFrom() {
         return from;
     }
 
-    public void setFrom(int from) {
-        this.from = from;
-    }
-
     public int getTo() {
         return to;
-    }
-
-    public void setTo(int to) {
-        this.to = to;
     }
 }
